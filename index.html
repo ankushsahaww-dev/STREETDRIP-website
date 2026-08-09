@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STREETDRIP - The Gen Z Uniform</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Material Symbols Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CDN with custom plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "primary-container": "#1b1b1b",
+            "on-primary-container": "#848484",
+            "secondary": "#5d5f5f",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#dfe0e0",
+            "on-secondary-container": "#616363",
+            "tertiary": "#000000",
+            "on-tertiary": "#ffffff",
+            "surface": "#f9f9f9",
+            "on-surface": "#1b1b1b",
+            "on-surface-variant": "#4c4546",
+            "surface-dim": "#dadada",
+            "surface-bright": "#f9f9f9",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f3f3f3",
+            "surface-container": "#eeeeee",
+            "surface-container-high": "#e8e8e8",
+            "surface-container-highest": "#e2e2e2",
+            "outline": "#7e7576",
+            "outline-variant": "#cfc4c5",
+            "error": "#ba1a1a",
+            "neon-green": "#39FF14",
+            "electric-blue": "#0000FF"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "base": "8px",
+            "gutter": "16px",
+            "container-margin": "24px",
+            "section-gap": "80px",
+            "stack-sm": "12px",
+            "stack-md": "24px"
+          },
+          fontFamily: {
+            "headline": ["Montserrat", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "display": ["Montserrat", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/src/style.css"/>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary selection:text-on-primary min-h-screen flex flex-col">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-primary text-on-primary font-bold text-xs flex justify-center items-center w-full py-2 z-[60] tracking-wider uppercase">
+    <span>🔥 FREE DELIVERY + CASH ON DELIVERY AVAILABLE NATIONWIDE &nbsp;|&nbsp; USE CODE <span class="text-yellow-300 underline font-black">DRIP40</span> FOR 40% OFF</span>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <nav class="glass-panel text-primary sticky top-0 border-b border-outline-variant/30 shadow-sm flex justify-between items-center w-full px-4 md:px-8 py-4 z-50 transition-all duration-300">
+    <!-- Brand Logo -->
+    <a href="#" class="text-2xl md:text-3xl font-black font-headline tracking-tighter text-primary flex items-center gap-1 group">
+      <span>STREETDRIP</span>
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform"></span>
+    </a>
+
+    <!-- Navigation Links -->
+    <div class="hidden md:flex items-center space-x-6 text-sm font-bold tracking-wide">
+      <button data-nav-filter="all" class="nav-link font-headline hover:text-black transition-colors py-1 border-b-2 border-primary">ALL DROPS</button>
+      <button data-nav-filter="Oversized Tees" class="nav-link font-headline text-on-surface-variant hover:text-primary transition-colors py-1 border-b-2 border-transparent">OVERSIZED</button>
+      <button data-nav-filter="Cargos & Bottoms" class="nav-link font-headline text-on-surface-variant hover:text-primary transition-colors py-1 border-b-2 border-transparent">CARGOS</button>
+      <button data-nav-filter="Accessories" class="nav-link font-headline text-on-surface-variant hover:text-primary transition-colors py-1 border-b-2 border-transparent">ACCESSORIES</button>
+      <button data-nav-filter="Flash Sale" class="nav-link font-headline text-red-600 hover:text-red-700 transition-colors py-1 border-b-2 border-transparent flex items-center gap-1">
+        <span>SALE</span>
+        <span class="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded font-black animate-pulse">HOT</span>
+      </button>
+    </div>
+
+    <!-- Action Icons -->
+    <div class="flex items-center space-x-3">
+      <!-- Search Button -->
+      <button id="open-search-btn" title="Search" class="p-2 hover:bg-black/5 rounded-full transition-all active:scale-90 flex items-center justify-center">
+        <span class="material-symbols-outlined text-2xl">search</span>
+      </button>
+
+      <!-- Account / Wishlist Button -->
+      <button id="open-account-btn" title="Account" class="p-2 hover:bg-black/5 rounded-full transition-all active:scale-90 flex items-center justify-center relative">
+        <span class="material-symbols-outlined text-2xl">person</span>
+      </button>
+
+      <!-- Cart Button -->
+      <button id="open-cart-btn" title="Shopping Bag" class="p-2 bg-black text-white hover:bg-neutral-800 rounded-full transition-all active:scale-95 flex items-center justify-center relative shadow-md pl-3 pr-4 gap-2">
+        <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+        <span class="font-bold text-xs font-headline" id="cart-count">0</span>
+      </button>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-btn" title="Menu" class="md:hidden p-2 hover:bg-black/5 rounded-full transition-all">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0 transition-opacity duration-300 flex justify-end">
+    <div class="w-4/5 max-w-xs bg-surface h-full p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300" id="mobile-menu-content">
+      <div>
+        <div class="flex justify-between items-center mb-8 border-b pb-4">
+          <span class="font-black font-headline text-xl">STREETDRIP</span>
+          <button id="close-mobile-menu" class="p-1 rounded-full hover:bg-neutral-200">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="flex flex-col space-y-4 font-bold text-base">
+          <button data-nav-filter="all" class="mobile-nav-item text-left py-2 border-b border-neutral-200">All Collections</button>
+          <button data-nav-filter="Oversized Tees" class="mobile-nav-item text-left py-2 border-b border-neutral-200">Oversized Tees</button>
+          <button data-nav-filter="Cargos & Bottoms" class="mobile-nav-item text-left py-2 border-b border-neutral-200">Cargo Pants</button>
+          <button data-nav-filter="Co-ords & Sets" class="mobile-nav-item text-left py-2 border-b border-neutral-200">Co-ord Sets</button>
+          <button data-nav-filter="Accessories" class="mobile-nav-item text-left py-2 border-b border-neutral-200">Accessories</button>
+          <button data-nav-filter="Flash Sale" class="mobile-nav-item text-left py-2 text-red-600">Flash Sale (Flat 40% Off)</button>
+        </div>
+      </div>
+      <div class="border-t pt-4">
+        <p class="text-xs text-neutral-500">Need Help? WhatsApp us 24/7</p>
+        <a href="tel:+919876543210" class="mt-2 block w-full py-2 bg-emerald-600 text-white text-center font-bold text-xs rounded uppercase">Customer Support</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative w-full h-[75vh] min-h-[500px] max-h-[850px] flex items-end pb-12 px-6 md:px-16 bg-neutral-900 overflow-hidden">
+      <!-- Hero Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover object-top opacity-85 scale-105 transition-transform duration-1000" 
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyV47_D0DDmxcMddaDZAKN1-w_fdDrQLUjbxKBgM1nlMfAuVdbquN4ywWw_cociLT9ZnSO5bdSNUvX7oR9zIO0mTsooptvveEp1spVHNt9XxBOso9NTGgCpa08KWKm1pBrI1aCrxOJTGpfpJbDMP5laK19WAv3yvfrqhArTmZw4oN1WBJbr-h6KW3r9yrGCLAhbkHiQRJmsIJqGLKqS727nCJVes3ik8O29lagoQar8cebkb2W9RkT" 
+             alt="Gen Z Streetwear Drop"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+      </div>
+
+      <!-- Glass Overlay Content -->
+      <div class="relative z-10 glass-panel p-6 md:p-10 rounded-2xl max-w-2xl border border-white/20 shadow-2xl backdrop-blur-xl">
+        <div class="inline-block bg-black text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+          ⚡ SEASON 04 DROP LIVE
+        </div>
+        <h1 class="font-headline font-black text-3xl sm:text-4xl md:text-5xl text-black uppercase leading-tight tracking-tight mb-3">
+          Drip that fits your budget 💸
+        </h1>
+        <p class="font-body text-base md:text-lg text-neutral-800 mb-6 font-medium">
+          Heavyweight fabrics. Raw urban graphics. Unbeatable prices crafted for India's Gen Z style pioneers.
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#products-section" class="bg-black text-white font-headline font-bold px-8 py-4 rounded-xl hover:bg-neutral-800 transition-all shadow-lg hover:shadow-xl active:scale-95 inline-flex items-center gap-2">
+            <span>SHOP THE DROP</span>
+            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+          </a>
+          <button id="hero-quick-view" class="bg-white/80 backdrop-blur-md text-black font-headline font-bold px-6 py-4 rounded-xl hover:bg-white transition-all border border-black/10 active:scale-95">
+            View Lookbook
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flash Sale Ticker & Live Countdown Banner -->
+    <section class="bg-blue-700 text-white py-4 w-full relative overflow-hidden shadow-inner">
+      <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center z-10 relative gap-3 md:gap-0">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
+          <h2 class="font-headline font-extrabold text-lg md:text-2xl uppercase tracking-widest text-center md:text-left">
+            FLASH SALE: FLAT 40% OFF EVERYTHING
+          </h2>
+        </div>
+        <div class="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-xl backdrop-blur-sm border border-white/10">
+          <span class="text-xs uppercase font-bold text-neutral-300">ENDS IN:</span>
+          <div class="font-headline font-black text-xl md:text-2xl text-emerald-400 tracking-wider font-mono" id="countdown">
+            02:45:12
+          </div>
+        </div>
+      </div>
+      <!-- Background Animated Marquee -->
+      <div class="absolute inset-0 flex items-center opacity-15 pointer-events-none overflow-hidden select-none">
+        <div class="marquee-content font-headline font-black text-5xl md:text-7xl whitespace-nowrap text-white">
+          STREETWEAR DRIP • LIMITED STOCKS • CASH ON DELIVERY • FAST SHIPPING • NO HIDDEN FEES • 
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Category Highlights -->
+    <section class="py-12 px-6 max-w-7xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h3 class="font-headline font-extrabold text-2xl md:text-3xl uppercase tracking-tight">Explore Categories</h3>
+          <p class="text-xs md:text-sm text-neutral-500 font-medium">Filter streetwear fits by price and style</p>
+        </div>
+        <button id="reset-filters-btn" class="text-xs font-bold font-headline underline text-neutral-600 hover:text-black">Reset View</button>
+      </div>
+
+      <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 gap-4" id="category-pills">
+        <!-- Pill 1 -->
+        <button data-category="Under ₹499" class="category-card flex flex-col items-center group p-3 rounded-2xl bg-white border border-neutral-200 hover:border-black transition-all hover:shadow-md active:scale-95">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border-2 border-neutral-200 group-hover:border-black transition-colors">
+            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDVvBlrDgmAkB9sLQ5eMq8gEllnNKF_U60iT6ZQxFYFZ7EiXruESZuZK3pZqDDMcUwffkmZrPdK1OoCrGHUULFx4LEvy50fgsMU5KUxRksu9fnvh-txx0ZeiGdpJ4ZkaYdXLwW1UmKKvocMjDj-uZruJFFncyb_H936cWTyrO2okE8qnvmP01Ts3OHK75PNgI9D5YnZ0JNGXfjrMi9pDxLJlOeO5yCtous2lkHyH98wxvKAZMiWjYd" alt="Under 499"/>
+          </div>
+          <span class="font-headline font-bold text-xs text-center text-neutral-800 group-hover:text-black">Under ₹499</span>
+        </button>
+
+        <!-- Pill 2 -->
+        <button data-category="Under ₹999" class="category-card flex flex-col items-center group p-3 rounded-2xl bg-white border border-neutral-200 hover:border-black transition-all hover:shadow-md active:scale-95">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border-2 border-neutral-200 group-hover:border-black transition-colors">
+            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPP-gd_8dmw7mA_s_TGoM2TBIQ-QQTWg2DfebcShJfZA0w6rE8-OOzROaUY4nnir0AFRDLG9YUYT7Vpaz9nz9rY9NHva-UnfDXAB4En6oyWYPyze324GagHhQvXD1k08ua3DHb62ns5wNhi65NV08Aqq7fjistPKC6BSQ6lFQt3GdwXeh7tn8_Z0BAWXt3J5j2-6AyCUkXyA-BBFhkZ3yMRtVWvhT8JeBKNd_ap6gtI1oHYFbTPQaR" alt="Under 999"/>
+          </div>
+          <span class="font-headline font-bold text-xs text-center text-neutral-800 group-hover:text-black">Under ₹999</span>
+        </button>
+
+        <!-- Pill 3 -->
+        <button data-category="Oversized Tees" class="category-card flex flex-col items-center group p-3 rounded-2xl bg-white border border-neutral-200 hover:border-black transition-all hover:shadow-md active:scale-95">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border-2 border-neutral-200 group-hover:border-black transition-colors">
+            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx_p1HFncHjbnAf9ykYr8s4Rw4tKYTo6MmZRaCZVyvWBzCc2CUK_br7LGRGh6vdawDQynu-UK3mmK40vh0d5Vpk3dJOgHqtuWC3DaBrFfWnEbBmadQwjWc4P4id4Y3SwtR7-hlTiHjOtxgIzvIpxJoDz5Vwnb2j9wuZraNttb0roZhrYOTStQcSe8smeDdljZFRdNauSursYwPMa_7YJWDbEaugE_jzdv-zpLzhTmOLL7LdhNdAsWl" alt="Oversized Tees"/>
+          </div>
+          <span class="font-headline font-bold text-xs text-center text-neutral-800 group-hover:text-black">Oversized Tees</span>
+        </button>
+
+        <!-- Pill 4 -->
+        <button data-category="Cargos & Bottoms" class="category-card flex flex-col items-center group p-3 rounded-2xl bg-white border border-neutral-200 hover:border-black transition-all hover:shadow-md active:scale-95">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border-2 border-neutral-200 group-hover:border-black transition-colors">
+            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbDWNxTnpygrTdNnQuANb53WqDxqXfBmPLwD1-Hm2zOf2zuklf59S0pcaH50DBpU7Ny9l-xjnh6FV8FFBaECnR-dc6N_c490rujQR4Ir5E2AQ4ftEk-YPeNWiAtNn0l77LEJmzfsn5_AfTuTpFiChfz-WJoGeWW61je7Xog37x9oy2Vnp2mNmQ9a9NPgAmywWat8yambR9CreIynuBmIj7AAXvCkpKY2gZpA-7GY5WhOHJgw6rtx4A" alt="Cargo Pants"/>
+          </div>
+          <span class="font-headline font-bold text-xs text-center text-neutral-800 group-hover:text-black">Cargo Pants</span>
+        </button>
+
+        <!-- Pill 5 -->
+        <button data-category="Co-ords & Sets" class="category-card flex flex-col items-center group p-3 rounded-2xl bg-white border border-neutral-200 hover:border-black transition-all hover:shadow-md active:scale-95">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border-2 border-neutral-200 group-hover:border-black transition-colors">
+            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC86lkomPUwVgs74L3wkJczi83obE0vs1yjKr_z03Ayl0txaQgUw3xiFYJl4OPBGNhKvVnZOp6HlAr24uEitnTxJbD_hixfcv63piFnw2SoYICWIXYxWHPJystrK05DtLUM1CT3ceBaQLKUkBCldxNquGhwiurCk9su2uGUGXKtPovVVvk1FqLVOeGP8YBI7UrPyQkDAd13DQ8vkhtUH-lUhOpPRIbxNjnwHA5TN8Flb5WNO8Gli0Tk" alt="Co-ords"/>
+          </div>
+          <span class="font-headline font-bold text-xs text-center text-neutral-800 group-hover:text-black">Co-ords & Sets</span>
+        </button>
+
+        <!-- Pill 6 -->
+        <button data-category="New Drops" class="category-card flex flex-col items-center group p-3 rounded-2xl bg-white border border-neutral-200 hover:border-black transition-all hover:shadow-md active:scale-95">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border-2 border-neutral-200 group-hover:border-black transition-colors">
+            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWBOysjBujEe6I7bYgVwnO11RozFsND13uMFsG5FPDWkTjC3BYra_I7pEhvAFls92y_WWVQRpAec_WBXd89XMYTkG6FICZEzUySJroBYvNfrxlxWvVwQ5SXihrSaiijVhKqqm9HlH-6QoB6TEgIt8zJk1dk2JXS1F2Pih7RwvbQTqaaiN61gXoJ6m0ZxP-5FHelQ8F_AftEkk0mFLy6ay3Rexo05xl1irIaf-MTp-uKXvID-d5wIRw" alt="New Drops"/>
+          </div>
+          <span class="font-headline font-bold text-xs text-center text-neutral-800 group-hover:text-black">New Drops</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Main Products Grid Section -->
+    <section id="products-section" class="py-12 px-6 max-w-7xl mx-auto border-t border-neutral-200">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-bold text-neutral-500 uppercase tracking-widest font-headline">CURATED FOR YOU</span>
+          <h3 class="font-headline font-extrabold text-3xl md:text-4xl uppercase tracking-tighter" id="active-category-title">
+            Trending Drops
+          </h3>
+        </div>
+        <div class="flex items-center gap-3">
+          <label for="sort-select" class="text-xs font-bold text-neutral-600 font-headline uppercase">Sort By:</label>
+          <select id="sort-select" class="bg-white border border-neutral-300 rounded-lg text-xs font-bold px-3 py-2 focus:ring-2 focus:ring-black outline-none">
+            <option value="featured">Featured First</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+            <option value="discount">Biggest Discount</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid Container -->
+      <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Shopping Cart Slide-over Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0 transition-opacity duration-300 flex justify-end">
+    <div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300" id="cart-drawer-content">
+      <!-- Header -->
+      <div class="p-5 border-b flex justify-between items-center bg-surface">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+          <h3 class="font-headline font-black text-lg">YOUR DRIP BAG</h3>
+          <span class="bg-black text-white text-xs font-bold px-2 py-0.5 rounded-full" id="cart-badge-drawer">0</span>
+        </div>
+        <button id="close-cart-btn" class="p-2 hover:bg-neutral-200 rounded-full transition-colors">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Free Shipping Tracker -->
+      <div class="bg-emerald-50 border-b border-emerald-200 px-5 py-3 text-xs font-bold text-emerald-900 flex items-center justify-between" id="shipping-tracker">
+        <span>🚚 Free shipping on orders over ₹499!</span>
+        <span id="shipping-status-text" class="text-emerald-700 font-extrabold">Qualified</span>
+      </div>
+
+      <!-- Cart Items List -->
+      <div class="flex-grow overflow-y-auto p-5 space-y-4" id="cart-items-container">
+        <!-- Dynamically rendered cart items -->
+      </div>
+
+      <!-- Footer & Checkout -->
+      <div class="p-5 border-t bg-surface space-y-4">
+        <!-- Promo Coupon Input -->
+        <div class="flex gap-2">
+          <input type="text" id="promo-input" placeholder="Promo code (e.g. DRIP40)" class="flex-grow text-xs font-bold px-3 py-2 border rounded-lg uppercase outline-none focus:ring-1 focus:ring-black">
+          <button id="apply-promo-btn" class="bg-neutral-800 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-black transition-colors">Apply</button>
+        </div>
+        <div id="promo-msg" class="text-xs font-bold hidden"></div>
+
+        <!-- Price Breakdown -->
+        <div class="space-y-1.5 text-xs text-neutral-600 font-medium border-t border-b py-3">
+          <div class="flex justify-between">
+            <span>Subtotal</span>
+            <span class="font-bold text-neutral-900" id="cart-subtotal">₹0</span>
+          </div>
+          <div class="flex justify-between text-emerald-600 font-bold" id="discount-row">
+            <span>Discount (DRIP40)</span>
+            <span id="cart-discount">-₹0</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Estimated Shipping</span>
+            <span class="font-bold text-emerald-600" id="cart-shipping">FREE</span>
+          </div>
+          <div class="flex justify-between text-base font-black text-black pt-2 border-t font-headline">
+            <span>TOTAL</span>
+            <span id="cart-total">₹0</span>
+          </div>
+        </div>
+
+        <button id="checkout-btn" class="w-full bg-black text-white font-headline font-bold py-4 rounded-xl hover:bg-neutral-800 transition-all flex justify-center items-center gap-2 shadow-lg active:scale-98">
+          <span>PROCEED TO CHECKOUT</span>
+          <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Search Modal -->
+  <div id="search-modal" class="fixed inset-0 bg-black/70 z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-start pt-16 px-4">
+    <div class="w-full max-w-2xl bg-white rounded-2xl p-6 shadow-2xl transform -translate-y-6 transition-transform duration-300" id="search-modal-content">
+      <div class="flex justify-between items-center pb-4 border-b">
+        <h3 class="font-headline font-black text-xl">Search streetwear fits</h3>
+        <button id="close-search-btn" class="p-1 hover:bg-neutral-200 rounded-full">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="mt-4 relative">
+        <span class="material-symbols-outlined absolute left-3 top-3.5 text-neutral-400">search</span>
+        <input type="text" id="search-input" placeholder="Search by name, tee, cargo, hoodie..." class="w-full pl-10 pr-4 py-3 bg-neutral-100 border border-neutral-300 rounded-xl font-bold text-sm outline-none focus:ring-2 focus:ring-black">
+      </div>
+      <div class="mt-6">
+        <div class="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-3">Live Search Results</div>
+        <div id="search-results-container" class="max-h-80 overflow-y-auto space-y-3">
+          <p class="text-sm text-neutral-500">Type above to search products...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Quick View Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black/75 z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center p-4">
+    <div class="w-full max-w-3xl bg-white rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative max-h-[90vh] flex flex-col md:flex-row" id="product-modal-content">
+      <button id="close-product-modal" class="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-md p-2 rounded-full hover:bg-white shadow">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <!-- Image Column -->
+      <div class="w-full md:w-1/2 bg-neutral-100 relative min-h-[300px]">
+        <img id="modal-img" src="" alt="Product Image" class="w-full h-full object-cover">
+        <span id="modal-badge" class="absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase"></span>
+      </div>
+
+      <!-- Info Column -->
+      <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
+        <div>
+          <span id="modal-category" class="text-xs font-bold text-neutral-400 uppercase tracking-widest font-headline"></span>
+          <h2 id="modal-title" class="font-headline font-black text-2xl text-black mt-1 mb-2"></h2>
+          <div class="flex items-center gap-3 mb-4">
+            <span id="modal-price" class="font-headline font-black text-2xl text-black"></span>
+            <span id="modal-mrp" class="text-neutral-400 line-through text-base font-normal"></span>
+            <span id="modal-discount" class="text-xs font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded"></span>
+          </div>
+          <p id="modal-desc" class="text-xs text-neutral-600 mb-6 leading-relaxed"></p>
+
+          <!-- Size Selector -->
+          <div class="mb-6">
+            <label class="block text-xs font-bold font-headline uppercase mb-2">Select Size</label>
+            <div class="flex gap-2" id="modal-size-container">
+              <button class="size-btn px-4 py-2 border rounded-lg text-xs font-bold hover:border-black focus:bg-black focus:text-white transition-all active">S</button>
+              <button class="size-btn px-4 py-2 border rounded-lg text-xs font-bold hover:border-black focus:bg-black focus:text-white transition-all">M</button>
+              <button class="size-btn px-4 py-2 border rounded-lg text-xs font-bold hover:border-black focus:bg-black focus:text-white transition-all">L</button>
+              <button class="size-btn px-4 py-2 border rounded-lg text-xs font-bold hover:border-black focus:bg-black focus:text-white transition-all">XL</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t flex gap-3">
+          <button id="modal-add-cart-btn" class="flex-grow bg-black text-white font-headline font-bold py-4 rounded-xl hover:bg-neutral-800 transition-all flex justify-center items-center gap-2 active:scale-95 shadow-md">
+            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+            <span>ADD TO BAG</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Flow Modal -->
+  <div id="checkout-modal" class="fixed inset-0 bg-black/75 z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center p-4">
+    <div class="w-full max-w-lg bg-white rounded-3xl p-6 md:p-8 shadow-2xl transform scale-95 transition-transform duration-300 relative" id="checkout-modal-content">
+      <button id="close-checkout-btn" class="absolute top-4 right-4 p-2 hover:bg-neutral-100 rounded-full">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="flex items-center gap-2 mb-6">
+        <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+        <h3 class="font-headline font-black text-2xl">Complete Order</h3>
+      </div>
+
+      <form id="checkout-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase mb-1">Full Name</label>
+          <input type="text" required placeholder="e.g. Rahul Sharma" class="w-full px-3 py-2.5 bg-neutral-50 border border-neutral-300 rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-black">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase mb-1">Phone Number</label>
+            <input type="tel" required placeholder="9876543210" class="w-full px-3 py-2.5 bg-neutral-50 border border-neutral-300 rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-black">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase mb-1">Pincode</label>
+            <input type="text" required placeholder="400001" class="w-full px-3 py-2.5 bg-neutral-50 border border-neutral-300 rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-black">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase mb-1">Delivery Address</label>
+          <textarea required rows="2" placeholder="House no, Street name, Area, City..." class="w-full px-3 py-2.5 bg-neutral-50 border border-neutral-300 rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-black"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase mb-2">Payment Method</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="border-2 border-black bg-neutral-50 rounded-xl p-3 text-center cursor-pointer flex flex-col items-center justify-center">
+              <input type="radio" name="payment" value="cod" checked class="hidden">
+              <span class="material-symbols-outlined text-emerald-600 mb-1">payments</span>
+              <span class="text-xs font-bold">COD</span>
+            </label>
+            <label class="border border-neutral-200 rounded-xl p-3 text-center cursor-pointer flex flex-col items-center justify-center hover:border-black">
+              <input type="radio" name="payment" value="upi" class="hidden">
+              <span class="material-symbols-outlined text-blue-600 mb-1">qr_code_scanner</span>
+              <span class="text-xs font-bold">UPI / GPay</span>
+            </label>
+            <label class="border border-neutral-200 rounded-xl p-3 text-center cursor-pointer flex flex-col items-center justify-center hover:border-black">
+              <input type="radio" name="payment" value="card" class="hidden">
+              <span class="material-symbols-outlined text-purple-600 mb-1">credit_card</span>
+              <span class="text-xs font-bold">Card</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-emerald-600 text-white font-headline font-black py-4 rounded-xl hover:bg-emerald-700 transition-all flex justify-center items-center gap-2 shadow-lg text-base">
+          <span>PLACE ORDER NOW</span>
+          <span class="material-symbols-outlined">check_circle</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Success Confirmation Modal -->
+  <div id="order-success-modal" class="fixed inset-0 bg-black/80 z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center p-4">
+    <div class="w-full max-w-md bg-white rounded-3xl p-8 text-center shadow-2xl transform scale-95 transition-transform duration-300 relative" id="order-success-content">
+      <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+        <span class="material-symbols-outlined text-5xl">check_circle</span>
+      </div>
+      <h3 class="font-headline font-black text-2xl text-black mb-1">ORDER CONFIRMED! 🎉</h3>
+      <p class="text-xs font-bold text-neutral-500 mb-4">Your order reference: <span id="order-ref-id" class="text-black font-extrabold font-mono">#DRIP-84920</span></p>
+      <p class="text-xs text-neutral-600 mb-6 leading-relaxed">
+        Thank you for shopping with STREETDRIP! We've received your order and will dispatch it within 24 hours. Free Cash on Delivery verified.
+      </p>
+      <button id="finish-order-btn" class="w-full bg-black text-white font-headline font-bold py-3.5 rounded-xl hover:bg-neutral-800 transition-all">
+        CONTINUE SHOPPING
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notifications Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none"></div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white px-6 md:px-16 py-16 border-t border-neutral-800">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div class="md:col-span-1">
+        <h2 class="text-3xl font-black font-headline tracking-tighter text-white mb-3">STREETDRIP</h2>
+        <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+          The ultimate Gen Z fashion destination in India. High quality heavyweight streetwear designed for urban drip without breaking the bank.
+        </p>
+        <p class="text-[11px] text-neutral-500">© 2026 STREETDRIP INDIA. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div>
+        <h4 class="font-headline font-bold text-sm uppercase tracking-wider mb-3 text-neutral-200">Customer Support</h4>
+        <ul class="space-y-2 text-xs text-neutral-400">
+          <li><a href="#" class="hover:text-white transition-colors">Track Your Order</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Shipping & Cash on Delivery</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Easy Returns & Exchange</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Size Guide & Fit Chart</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-headline font-bold text-sm uppercase tracking-wider mb-3 text-neutral-200">Quick Links</h4>
+        <ul class="space-y-2 text-xs text-neutral-400">
+          <li><a href="#" class="hover:text-white transition-colors">Oversized T-Shirts</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Utility Cargo Pants</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Pastel Co-ord Sets</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Flash Sale 40% Off</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-headline font-bold text-sm uppercase tracking-wider mb-3 text-neutral-200">Join the Drip Club</h4>
+        <p class="text-xs text-neutral-400 mb-3">Get VIP access to exclusive drops and extra discounts.</p>
+        <form id="newsletter-form" class="flex gap-2">
+          <input type="email" placeholder="Your email address" required class="bg-neutral-900 border border-neutral-700 text-xs px-3 py-2 rounded-lg flex-grow text-white outline-none focus:border-white">
+          <button type="submit" class="bg-white text-black font-bold text-xs px-4 py-2 rounded-lg hover:bg-neutral-200 transition-colors">JOIN</button>
+        </form>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
